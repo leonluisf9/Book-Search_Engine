@@ -8,16 +8,10 @@ import {
   login,
 } from '../../controllers/user-controller.js';
 
-// import middleware
-import { authenticateToken } from '../../services/auth.js';
-
 // put authMiddleware anywhere we need to send a token for verification of user
-router.route('/').post(createUser).put(authenticateToken, saveBook);
-
+router.route('/').post(createUser).put(saveBook);
 router.route('/login').post(login);
-
-router.route('/me').get(authenticateToken, getSingleUser);
-
-router.route('/books/:bookId').delete(authenticateToken, deleteBook);
+router.route('/me').get(getSingleUser);
+router.route('/books/:bookId').delete(deleteBook);
 
 export default router;
