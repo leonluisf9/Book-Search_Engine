@@ -22,8 +22,6 @@ const server = new ApolloServer({
   introspection: true, 
 });
 
-await server.start();
-
 async function startServer() {
   await server.start();
   console.log("Apollo Server Started!");
