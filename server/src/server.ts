@@ -22,11 +22,16 @@ const server = new ApolloServer({
   introspection: true, 
 });
 
+await server.start();
+
 async function startServer() {
   await server.start();
   console.log("Apollo Server Started!");
 
-  app.use(cors());
+  app.use(cors({
+    origin: 'https://book-search-engine-7c4s.onrender.com',
+    credentials: true
+  }));
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
