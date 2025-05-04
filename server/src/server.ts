@@ -44,19 +44,11 @@ async function startServer() {
   );
 
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.use(express.static(path.join(__dirname, '../client/dist')));
   }
 
-  app.get('/', (_, res) => {
-    res.send('Server is running!');
-  });
-
-  // app.listen(PORT, () => {
-  //   console.log(`Server running on http://localhost:${PORT}/graphql`);
-  // });
-
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on http://0.0.0.0:${PORT}/graphql`);
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}/graphql`);
   });
 
   db.once('open', () => {
