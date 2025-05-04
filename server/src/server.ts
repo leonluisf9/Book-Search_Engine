@@ -44,7 +44,7 @@ async function startServer() {
   );
 
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+    app.use(express.static(path.join(__dirname, '../../client/dist')));
   }
 
   app.listen(PORT, () => {
