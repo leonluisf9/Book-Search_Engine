@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import path from 'node:path';
 import { fileURLToPath } from 'url';
 import { ApolloServer } from '@apollo/server';
@@ -14,32 +13,16 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
-const PORT = Number(process.env.PORT) || 3001;
+const PORT = process.env.PORT || 3001;
 console.log("Initializing Apollo Server...");
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: true, 
 });
 
 async function startServer() {
   await server.start();
   console.log("Apollo Server Started!");
-
-  app.use((_req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); 
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-    next();
-  });
-  
-  app.use(cors({
-    origin: 'https://book-search-engine-7c4s.onrender.com',
-    credentials: true
-  }));
-  app.use(express.urlencoded({ extended: true }));
-  app.use(express.json());
 
   app.use(
     '/graphql',
