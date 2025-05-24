@@ -7,14 +7,9 @@ import App from './App.jsx';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 
-// Determine backend URL based on environment
-const API_URI = process.env.NODE_ENV === 'development' 
-  ? 'http://localhost:3001/graphql' 
-  : 'https://apollobooksearch.onrender.com/graphql';
-
 // Create Apollo Client
 const client = new ApolloClient({
-  uri: API_URI,
+  uri: '/graphql', // Use relative path for development and production
   cache: new InMemoryCache(),
 });
 

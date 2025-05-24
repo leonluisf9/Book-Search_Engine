@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/graphql';
+import { ADD_USER } from '../utils/graphql.js';
 import Auth from '../utils/auth';
 
 const SignupForm = ({ handleModalClose }: { handleModalClose: () => void }) => {

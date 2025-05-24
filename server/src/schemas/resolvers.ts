@@ -27,10 +27,20 @@ const resolvers = {
     },
 
     // Register new user
-    addUser: async (_parent: any, { username, email, password }: { username: string; email: string; password: string }) => {
+    addUser: async (
+      _parent: any,
+       { username, email, password }: { username: string; email: string; password: string }
+      ) => {
+      try {
       const user = await User.create({ username, email, password });
+      // const token = signToken(user.username, user.email, user._id);
       const token = signToken(user.username, user.email, user._id);
       return { token, user };
+      } catch (error) {
+        console.log('Error creating user:', error);
+        throw new GraphQLError('Error creating user', { extensions: { code: 'INTERNAL_SERVER_ERROR' },
+        });
+      }
     },
 
     // Save a book to the user's savedBooks array

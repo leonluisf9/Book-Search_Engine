@@ -24,6 +24,9 @@ async function startServer() {
   await server.start();
   console.log("Apollo Server Started!");
 
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
   app.use(
     '/graphql',
     expressMiddleware(server, {
@@ -38,6 +41,7 @@ async function startServer() {
   );
 
   if (process.env.NODE_ENV === 'production') {
+    console.log("Serving Production Build...");
     app.use(express.static(path.join(__dirname, '../../client/dist')));
   }
 
